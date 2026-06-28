@@ -3,6 +3,12 @@
 Decodes CCSDS-like telemetry frames into typed sensor readings.
 Handles packet loss via sequence counter gap detection.
 Zero external dependencies — pure struct + math.
+
+Frame sync word: 0x1ACF (CCSDS standard)
+CRC: CRC-16-CCITT (poly 0x1021, init 0xFFFF)
+Max frame size: 4096 bytes (adjustable)
+
+If you know what 0x1ACF means, we can be friends.
 """
 
 import struct
