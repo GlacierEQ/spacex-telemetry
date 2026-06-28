@@ -1,0 +1,11 @@
+{
+  "project": "spacex-telemetry",
+  "version": "1.0.0",
+  "architecture": "double-helix",
+  "alpha": "telemetry_decoder.py",
+  "omega": "telemetry_controller.py",
+  "stealth_sigil": "TELEM-SIGIL-0x1ACF",
+  "shadow_memory": true,
+  "watchdog_daemon": true,
+  "integrity_check": "sha256"
+}
