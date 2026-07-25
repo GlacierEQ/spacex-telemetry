@@ -13,11 +13,13 @@
 |------|--------|------|------|
 | `flight` | **bridge** | Rate/gap bus — truth of what was heard | Flight awareness — know the orbit, command the consoles, hear the bus |
 | `spacex_propulsion` | **bridge** | Shared bus between prop and launch | Propulsion awareness — chamber health feeds pad ops |
+| `launch_campaign` | **bridge** | Shared bus across campaign stars | Launch campaign go/no-go — multi-star meta-spiral (flight + prop + ground) |
 
 ### How this accelerates its twin
 
 - **flight:** bridge medium (telemetry/bus) between spirals.
 - **spacex_propulsion:** bridge medium (telemetry/bus) between spirals.
+- **launch_campaign:** bridge medium (telemetry/bus) between spirals.
 
 ## Runtime
 
