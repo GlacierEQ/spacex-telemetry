@@ -1,0 +1,10 @@
+{
+  "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/telemetry_bus.py": "bc2e28610cfe78d50efd4adf0e69bace1fcfd16a695e6f8884f030aa2c5b9314",
+  "src/omega/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/omega/information_fingerprint.py": "45ce85d4ad755a3cab70c8e91214cb10927cfb9131dbe8aff32a7b0776de8dd9",
+  "src/omega/telemetry_controller.py": "0979b19ee50a76aa5cd6e0a1be6f3bf9fe909f9e82f6e3069b3b13d57057015f",
+  "src/alpha/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/alpha/telemetry_decoder.py": "7cfae41864c4d5a111ab204978c682d44454d99381b2e1101a8ab76709c2ca84",
+  "mastermind_sidecar.py": "200035387f7179c8c4888b3e31e4f391ab5f4b0e3b35285d5a18b0d835157ea5"
+}

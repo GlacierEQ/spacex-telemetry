@@ -51,11 +51,25 @@ class SimpleCompressor:
         self.min_match = min_match
 
     def compress_ratio(self, data: list[float]) -> float:
+        """Estimate compressibility in [0, 1] (lower = more compressible).
+
+        Uses run-length encoding on 2-decimal quantized samples as a
+        transparent baseline, then refines with a window match pass.
+        """
+        if not data:
+            return 1.0
         if len(data) < self.min_match:
             return 1.0
 
         quantized = [round(v, 2) for v in data]
         original_size = len(quantized) * 8
+
+        # RLE baseline — honest and stable for telemetry plateaus
+        runs = 1
+        for i in range(1, len(quantized)):
+            if quantized[i] != quantized[i - 1]:
+                runs += 1
+        rle_size = runs * 8  # value + count pair budget
 
         compressed_size = 0
         i = 0
@@ -91,7 +105,9 @@ class SimpleCompressor:
             if len(window) > self.window_size * 2:
                 window = window[-self.window_size:]
 
-        return compressed_size / original_size if original_size > 0 else 1.0
+        lz_size = compressed_size if compressed_size > 0 else original_size
+        best = min(lz_size, rle_size)
+        return best / original_size if original_size > 0 else 1.0
 
 
 class EntropyAnalyzer:
