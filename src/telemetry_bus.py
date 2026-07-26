@@ -18,7 +18,10 @@ class Frame:
 
 @dataclass
 class TelemetryBus:
-    """Ingest frames with per-stream max rate and drop accounting."""
+    """Ingest frames with per-stream max rate and drop accounting.
+
+    Accepted frames are kept for protobuf batch export (real wire condensation).
+    """
 
     max_hz: float = 100.0
     last_t: dict[str, int] = field(default_factory=dict)
@@ -26,7 +29,9 @@ class TelemetryBus:
     drops: int = 0
     accepted: int = 0
     rate_limited: int = 0
+    keep_history: int = 10_000
     _per_stream_drops: dict[str, int] = field(default_factory=lambda: defaultdict(int))
+    _history: list = field(default_factory=list, repr=False)
 
     def __post_init__(self) -> None:
         if self.max_hz <= 0:
@@ -65,6 +70,9 @@ class TelemetryBus:
         self.last_t[f.stream] = f.t_ms
         self.last_seq[f.stream] = f.seq
         self.accepted += 1
+        self._history.append(f)
+        if len(self._history) > self.keep_history:
+            self._history = self._history[-self.keep_history :]
         return {
             "ok": True,
             "accepted": self.accepted,
@@ -73,12 +81,25 @@ class TelemetryBus:
             "stream": f.stream,
         }
 
+    def export_protobuf_batch(self, *, source: str = "bus") -> bytes:
+        """Serialize accepted history as protobuf TelemetryBatch (dense wire)."""
+        from proto_codec import encode_batch
+
+        return encode_batch(self._history, source=source)
+
+    def condensation_report(self, *, source: str = "bus") -> dict:
+        """Measured protobuf vs JSON size for current history."""
+        from proto_codec import measure_condensation
+
+        return measure_condensation(self._history, source=source)
+
     def stats(self) -> dict:
         return {
             "accepted": self.accepted,
             "drops": self.drops,
             "rate_limited": self.rate_limited,
             "streams": len(self.last_seq),
+            "history": len(self._history),
             "per_stream_drops": dict(self._per_stream_drops),
         }
 
