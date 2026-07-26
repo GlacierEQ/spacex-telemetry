@@ -1,0 +1,15 @@
+// Helix inter-piston envelope — structured handoff, not chat blobs.
+syntax = "proto3";
+package glaciereq.helix.v1;
+
+message HelixEnvelope {
+  string pair_id = 1;
+  string piston = 2;
+  string spiral = 3;  // alpha | omega | bridge | meta
+  string status = 4;
+  int64 ts_ms = 5;
+  // Opaque JSON only when schema-less needed; prefer typed fields below
+  bytes json_fallback = 6;
+  map<string, double> numbers = 7;
+  map<string, string> tags = 8;
+}
