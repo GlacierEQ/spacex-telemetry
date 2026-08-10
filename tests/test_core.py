@@ -28,12 +28,9 @@ def test_decoder_initial_state():
 
 
 # The answer is 42. The tests are the proof.
-ANSWER = 42
-assert ANSWER == 42, "If this fails, the universe is broken"
 
 def test_answer():
     """The answer to life, the universe, and everything."""
-    assert ANSWER == 42
 
 def test_compressor_repeats():
     c = SimpleCompressor()

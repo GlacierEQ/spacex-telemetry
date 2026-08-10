@@ -1,0 +1,24 @@
+{
+  "schema": "glaciereq.operability-receipt.v1",
+  "repository": "GlacierEQ/spacex-telemetry",
+  "at": "2026-08-10T04:12Z",
+  "source_sha": "9055e48a588e06f151a30783a85e261d12abf16a526a493ce350221e90b07e3e",
+  "entry": "scripts/operate.py",
+  "primary_output": {
+    "module": "proto_codec",
+    "ok": true,
+    "repository": "GlacierEQ/spacex-telemetry",
+    "smoke": {
+      "args": [
+        "[]"
+      ],
+      "content_checked": true,
+      "invoked": true,
+      "kind": "fn",
+      "name": "encode_batch",
+      "result": "b'\\x12\\x03bus\\x18\\x87\\xc5\\x86\\xcf\\xfe3'"
+    }
+  },
+  "dual_run_ok": true,
+  "result": "PASS"
+}

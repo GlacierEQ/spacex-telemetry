@@ -1,0 +1,11 @@
+{
+  "schema": "glaciereq.promotion-authority-grant.v1",
+  "repository": "GlacierEQ/spacex-telemetry",
+  "source_sha": "9055e48a588e06f151a30783a85e261d12abf16a526a493ce350221e90b07e3e",
+  "proof_receipt_digest": "7fd96f418b28ffe22bcb26654dd6a40d4765a3ec5a67d9ca76bb97622200b813",
+  "not_after": 1788927149.234226,
+  "mac": "9df78c3413e25c4d6eaa3583dfc8deff0b4dd88d1d29ce1bfb8e0d6a4d0a2c65",
+  "issuer": "local_operator_promotion_authority",
+  "verified": true,
+  "secret_ref": "src/promotion_authority.py::LOCAL_OPERATOR_SECRET"
+}
