@@ -1,1 +1,9 @@
-{"capabilities": ["hyper-scaling"]}
+{
+  "capabilities": [
+    "synthetic-telemetry-framing",
+    "crc-integrity-rejection",
+    "sequence-gap-accounting",
+    "local-threshold-controller",
+    "bounded-go-binary-codec"
+  ]
+}

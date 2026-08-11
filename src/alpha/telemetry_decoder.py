@@ -1,21 +1,18 @@
-"""Real-time telemetry frame decoder for Falcon 9 / Starship downlinks.
+"""Repository-local synthetic telemetry frame codec.
 
-Decodes CCSDS-like telemetry frames into typed sensor readings.
-Handles packet loss via sequence counter gap detection.
-Zero external dependencies — pure struct + math.
+This module defines a deterministic binary frame format for testing buffering,
+sequence-gap detection, CRC rejection, callbacks, and typed sensor records. It
+is not a SpaceX, Falcon, Starship, CCSDS, or production telemetry downlink
+implementation and does not ingest external telemetry.
 
-Frame sync word: 0x1ACF (CCSDS standard)
-CRC: CRC-16-CCITT (poly 0x1021, init 0xFFFF)
-Max frame size: 4096 bytes (adjustable)
-
-If you know what 0x1ACF means, we can be friends.
+The demonstration format uses sync word 0x1ACF and CRC-16-CCITT so the parser
+has realistic framing and integrity failure modes without implying provenance.
 """
 
 import struct
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import IntEnum
-from typing import Optional
 
 
 class SensorType(IntEnum):
@@ -105,8 +102,11 @@ class TelemetryDecoder:
         self._callbacks.append(fn)
 
     def feed(self, raw: bytes) -> list[TelemetryReading]:
-        self._buffer[self._buf_len:self._buf_len + len(raw)] = raw
-        self._buf_len += len(raw)
+        required = self._buf_len + len(raw)
+        if required > len(self._buffer):
+            raise ValueError("telemetry buffer capacity exceeded")
+        self._buffer[self._buf_len : required] = raw
+        self._buf_len = required
         self._readings.clear()
 
         while self._buf_len >= FRAME_HEADER.size + FRAME_CRC_SIZE:
@@ -120,25 +120,27 @@ class TelemetryDecoder:
         while start <= self._buf_len - FRAME_HEADER.size - FRAME_CRC_SIZE:
             header = FRAME_HEADER.unpack_from(self._buffer, start)
             sync, version, src, dst, seq, payload_len = header
+            del version, src, dst
 
             if sync != 0x1ACF:
                 start += 1
                 continue
+            if payload_len > len(self._buffer) - FRAME_HEADER.size - FRAME_CRC_SIZE:
+                self._discard_prefix(start + 1)
+                return False
 
             frame_total = FRAME_HEADER.size + payload_len + FRAME_CRC_SIZE
             if start + frame_total > self._buf_len:
+                if start:
+                    self._discard_prefix(start)
                 return False
 
             payload_start = start + FRAME_HEADER.size
             payload_end = payload_start + payload_len
             payload = self._buffer[payload_start:payload_end]
 
-            crc_offset = payload_end
-            expected_crc = struct.unpack_from(">H", self._buffer, crc_offset)[0]
-            computed_crc = crc16_ccitt(
-                self._buffer[start + FRAME_HEADER.size:payload_end]
-            )
-
+            expected_crc = struct.unpack_from(">H", self._buffer, payload_end)[0]
+            computed_crc = crc16_ccitt(bytes(payload))
             self.stats.total_frames += 1
 
             if computed_crc != expected_crc:
@@ -146,16 +148,19 @@ class TelemetryDecoder:
                 start += 1
                 continue
 
-            self._process_frame(seq, payload)
-            consumed = start + frame_total
-            remaining = self._buf_len - consumed
-            self._buffer[:remaining] = self._buffer[consumed:self._buf_len]
-            self._buf_len = remaining
+            self._process_frame(seq, bytes(payload))
+            self._discard_prefix(start + frame_total)
             return True
 
-        if self._buf_len > 0:
-            self._buf_len = 0
+        if start:
+            self._discard_prefix(start)
         return False
+
+    def _discard_prefix(self, consumed: int) -> None:
+        remaining = self._buf_len - consumed
+        if remaining > 0:
+            self._buffer[:remaining] = self._buffer[consumed : self._buf_len]
+        self._buf_len = max(remaining, 0)
 
     def _process_frame(self, seq: int, payload: bytes):
         if self.stats.last_sequence >= 0:
@@ -170,9 +175,7 @@ class TelemetryDecoder:
 
         offset = 0
         while offset + SENSOR_RECORD.size <= len(payload):
-            s_id, s_type_raw, quality, value = SENSOR_RECORD.unpack_from(
-                payload, offset
-            )
+            s_id, s_type_raw, quality, value = SENSOR_RECORD.unpack_from(payload, offset)
             offset += SENSOR_RECORD.size
 
             try:
@@ -191,11 +194,16 @@ class TelemetryDecoder:
             )
             self._readings.append(reading)
 
-            for cb in self._callbacks:
-                cb(reading)
+            for callback in self._callbacks:
+                callback(reading)
 
 
-def encode_frame(src: int, dst: int, seq: int, sensors: list[tuple[int, SensorType, int, float]]) -> bytes:
+def encode_frame(
+    src: int,
+    dst: int,
+    seq: int,
+    sensors: list[tuple[int, SensorType, int, float]],
+) -> bytes:
     payload = bytearray()
     for s_id, s_type, quality, value in sensors:
         payload.extend(SENSOR_RECORD.pack(s_id, s_type, quality, value))
