@@ -2,21 +2,28 @@
   "schema": "glaciereq.repo-target-contract.v1",
   "identity": {
     "repository_id": "GlacierEQ/spacex-telemetry",
-    "family": "elite-estate"
+    "family": "synthetic-telemetry-laboratory"
   },
   "current": {
-    "state": "PROMOTED",
+    "state": "TESTED",
     "implemented": true,
     "tested": true,
     "deployed": false
   },
+  "verified_capability": "deterministic-synthetic-telemetry-codec-and-controller",
+  "evidence_token": "LOCAL_SYNTHETIC_TELEMETRY_CODEC_NOT_SPACEX_DATA",
   "nonclaims": [
-    "no employer affiliation",
-    "no production deployment without receipt"
+    "no SpaceX affiliation or proprietary telemetry access",
+    "no Falcon or Starship protocol compatibility",
+    "no CCSDS compliance claim",
+    "no 50000-plus packets-per-second benchmark",
+    "no sub-millisecond latency claim",
+    "no production deployment without external receipt",
+    "no live MCP, provider, APEX, AKOS, or Mastermind runtime connectivity"
   ],
   "donor_plan": {
     "mode": "none",
     "donors": []
   },
-  "frozen_at": "2026-08-10T04:12Z"
+  "truth_hardened_at": "2026-08-10T19:30:00-10:00"
 }
