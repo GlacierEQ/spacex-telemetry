@@ -1,19 +1,18 @@
-// Real telemetry wire format — dense binary for high-rate streams.
-// Source of truth; regenerate Python with scripts/gen_proto.sh
+// Repository-local telemetry interchange schema for deterministic portfolio tests.
+// This is not a SpaceX, Falcon, Starship, CCSDS, or production telemetry schema.
 syntax = "proto3";
 package glaciereq.telemetry.v1;
 
-// Single frame on the bus (matches Frame dataclass semantics).
+// Generic telemetry frame used for local serialization and handoff experiments.
 message TelemetryFrame {
   string stream = 1;
   int64 seq = 2;
   int64 t_ms = 3;
-  // Optional payload (sensor blob / JSON bytes when needed)
   bytes payload = 4;
   map<string, double> metrics = 5;
 }
 
-// Batch for inter-process / disk / helix handoff condensation.
+// Generic local batch envelope; external persistence or transport is not implied.
 message TelemetryBatch {
   repeated TelemetryFrame frames = 1;
   string source = 2;
