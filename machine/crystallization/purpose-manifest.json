@@ -1,0 +1,10 @@
+{
+  "schema": "glaciereq.crystallization-purpose.v1",
+  "repository": "GlacierEQ/spacex-telemetry",
+  "canonical_purpose": "Provide an installable deterministic local laboratory for synthetic telemetry framing, integrity rejection, sequence accounting, threshold control, local Protobuf serialization, and a bounded native Go packet codec.",
+  "consumers": ["developers", "reviewers", "local telemetry simulations"],
+  "natural_runtime": "installable local Python library/CLI plus native Go codec tests",
+  "naturally_deployable": false,
+  "deployment_reason": "Production telemetry connectivity would introduce external data/protocol/authority claims outside the repository-owned synthetic laboratory purpose.",
+  "evidence_state": "LOCAL_SYNTHETIC_TELEMETRY_CODEC_NOT_SPACEX_DATA"
+}

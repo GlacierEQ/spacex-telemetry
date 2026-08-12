@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glaciereq-synthetic-telemetry-lab"
+version = "1.0.0"
+description = "Independent synthetic telemetry codec, integrity, sequence, and threshold-control laboratory"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "protobuf>=5.26",
+  "numpy>=1.24",
+]
+
+[project.scripts]
+telemetry-lab-demo = "telemetry_lab_cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["alpha", "omega", "glaciereq_pb"]
+py-modules = ["proto_codec", "telemetry_bus", "promotion_authority", "telemetry_lab_cli"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
