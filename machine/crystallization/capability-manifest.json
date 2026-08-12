@@ -1,0 +1,14 @@
+{
+  "schema": "glaciereq.crystallization-capabilities.v1",
+  "capabilities": [
+    {"id":"synthetic_binary_framing","state":"WORKING","implementation_paths":["src/alpha/telemetry_decoder.py"],"verification":["tests/test_telemetry.py","tests/test_adversarial.py"]},
+    {"id":"bounded_partial_frame_buffering","state":"WORKING","implementation_paths":["src/alpha/telemetry_decoder.py"],"verification":["tests/test_telemetry.py","tests/test_adversarial.py"]},
+    {"id":"crc_integrity_rejection","state":"WORKING","implementation_paths":["src/alpha/telemetry_decoder.py"],"verification":["tests/test_telemetry.py","tests/test_installable_telemetry_lab.py"]},
+    {"id":"sequence_gap_accounting","state":"WORKING","implementation_paths":["src/alpha/telemetry_decoder.py"],"verification":["tests/test_telemetry.py","tests/test_installable_telemetry_lab.py"]},
+    {"id":"local_threshold_controller","state":"WORKING","implementation_paths":["src/omega/telemetry_controller.py"],"verification":["tests/test_telemetry.py","tests/test_installable_telemetry_lab.py"]},
+    {"id":"local_protobuf_serialization","state":"WORKING","implementation_paths":["src/proto_codec.py","src/glaciereq_pb"],"verification":["tests/test_protobuf_real.py","tests/test_installable_telemetry_lab.py"]},
+    {"id":"bounded_go_binary_codec","state":"WORKING","implementation_paths":["src/telemetry_decoder.go"],"verification":["src/telemetry_decoder_test.go","scripts/ci/verify.sh"]},
+    {"id":"installable_python_product","state":"WORKING","implementation_paths":["pyproject.toml","src/telemetry_lab_cli.py"],"verification":["scripts/ci/verify.sh"]},
+    {"id":"direct_deterministic_operability","state":"WORKING","implementation_paths":["scripts/operate.py"],"verification":["tests/test_installable_telemetry_lab.py","scripts/ci/verify.sh"]}
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "naturally_deployable": false,
+  "test_commands": [["python", "-m", "pytest", "-q", "tests"], ["go", "test", "./..."]],
+  "build_commands": [["python", "-m", "pip", "wheel", ".", "--no-deps", "--no-build-isolation", "-w", "dist"], ["go", "vet", "./..."]],
+  "runtime_commands": [["telemetry-lab-demo", "--compact"], ["python", "scripts/operate.py"]],
+  "truth_commands": [["python", "scripts/verify_public_surface.py"]],
+  "deployment_reason": "Local synthetic telemetry laboratory; live external telemetry or flight integration requires separate provenance, protocol, safety, and authority evidence."
+}

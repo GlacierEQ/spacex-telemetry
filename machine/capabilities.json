@@ -1,9 +1,17 @@
 {
+  "schema": "glaciereq.repository-capabilities.v2",
+  "status": "FUNCTIONAL_CRYSTALLIZATION_CANDIDATE",
+  "evidence_token": "LOCAL_SYNTHETIC_TELEMETRY_CODEC_NOT_SPACEX_DATA",
   "capabilities": [
     "synthetic-telemetry-framing",
+    "bounded-partial-frame-buffering",
     "crc-integrity-rejection",
     "sequence-gap-accounting",
     "local-threshold-controller",
-    "bounded-go-binary-codec"
-  ]
+    "local-protobuf-serialization",
+    "bounded-go-binary-codec",
+    "installable-local-library-and-cli",
+    "direct-deterministic-operability"
+  ],
+  "terminal_status_requires": "exact-head Python/Go build, tests, installed CLI, direct runtime, public truth verification, empty gap matrix, and source-bound completion receipt"
 }

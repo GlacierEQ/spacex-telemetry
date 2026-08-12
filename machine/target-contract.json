@@ -1,29 +1,27 @@
 {
-  "schema": "glaciereq.repo-target-contract.v1",
+  "schema": "glaciereq.repo-target-contract.v2",
   "identity": {
     "repository_id": "GlacierEQ/spacex-telemetry",
-    "family": "synthetic-telemetry-laboratory"
+    "family": "synthetic-telemetry-laboratory",
+    "purpose": "installable local synthetic telemetry framing, integrity, sequence, threshold-control, Protobuf, and Go-codec laboratory"
   },
   "current": {
-    "state": "TESTED",
+    "state": "FUNCTIONAL_CRYSTALLIZATION_CANDIDATE",
     "implemented": true,
-    "tested": true,
-    "deployed": false
+    "tested_parent_head": true,
+    "terminal_current_head_verified": false,
+    "deployed": false,
+    "naturally_deployable": false
   },
   "verified_capability": "deterministic-synthetic-telemetry-codec-and-controller",
   "evidence_token": "LOCAL_SYNTHETIC_TELEMETRY_CODEC_NOT_SPACEX_DATA",
+  "completion_rule": "CRYSTALLIZED only after the exact productized head builds and installs its Python package, passes Python and Go behavior/adversarial proof, executes the installed CLI and direct operator, preserves public truth, and has zero known material local-purpose gaps.",
   "nonclaims": [
     "no SpaceX affiliation or proprietary telemetry access",
     "no Falcon or Starship protocol compatibility",
     "no CCSDS compliance claim",
-    "no 50000-plus packets-per-second benchmark",
-    "no sub-millisecond latency claim",
-    "no production deployment without external receipt",
+    "no production throughput or latency claim",
+    "no production deployment or mission authority",
     "no live MCP, provider, APEX, AKOS, or Mastermind runtime connectivity"
-  ],
-  "donor_plan": {
-    "mode": "none",
-    "donors": []
-  },
-  "truth_hardened_at": "2026-08-10T19:30:00-10:00"
+  ]
 }
