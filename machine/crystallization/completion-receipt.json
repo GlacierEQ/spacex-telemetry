@@ -1,0 +1,65 @@
+{
+  "schema": "glaciereq.crystallization-completion-receipt.v1",
+  "repository": "GlacierEQ/spacex-telemetry",
+  "status": "CRYSTALLIZED",
+  "verified_source_head": "9bfe15e02acbe425a4c27989112e8a29a0521dd0",
+  "canonical_purpose": "Provide an installable deterministic local laboratory for synthetic telemetry framing, integrity rejection, sequence accounting, threshold control, local Protobuf serialization, and a bounded native Go packet codec.",
+  "evidence_state": "LOCAL_SYNTHETIC_TELEMETRY_CODEC_NOT_SPACEX_DATA",
+  "capabilities": {
+    "material_count": 9,
+    "implemented_count": 9,
+    "verified_count": 9,
+    "remaining_gap_count": 0
+  },
+  "proof": {
+    "ci": {
+      "workflow_run_id": 31643941686,
+      "job_id": 94272968274,
+      "conclusion": "success",
+      "proved": [
+        "37 Python behavioral/adversarial tests",
+        "installable wheel build",
+        "installed telemetry-lab-demo execution",
+        "direct canonical operability execution",
+        "native Go format/vet/tests",
+        "public-surface verification",
+        "all crystallization capabilities WORKING",
+        "empty material gap matrix"
+      ]
+    },
+    "public_truth": {
+      "workflow_run_id": 31643940979,
+      "conclusion": "success"
+    }
+  },
+  "observed_runtime_receipt": {
+    "binary_decoded_frames": 3,
+    "intentional_sequence_gap_count": 1,
+    "dropped_frames": 1,
+    "corrupt_crc_errors": 1,
+    "threshold_alert_severity": "WARNING",
+    "protobuf_stream": "local-demo",
+    "protobuf_encoded_bytes": 51,
+    "external_inputs_consumed": 0,
+    "external_actions_executed": 0,
+    "demo_digest": "a33e7d978579acb86907a8fe4860314c571058d73583b4d6dc73a810837c810d",
+    "wheel_sha256": "e4b90c10f79545d548c30f3e2ea3f143f137632734b24a1eaf305ab0a417e4bc"
+  },
+  "build": "PASS",
+  "tests": "PASS",
+  "runtime": "PASS",
+  "native_go": "PASS",
+  "truth_verification": "PASS",
+  "deployment": {
+    "status": "NOT_APPLICABLE",
+    "reason": "The repository is complete as a local synthetic telemetry laboratory. Live external telemetry or flight integration would add provenance, protocol, safety, and authority requirements outside the verified purpose."
+  },
+  "truth_boundary": [
+    "No SpaceX affiliation or proprietary telemetry access is established.",
+    "No Falcon, Starship, CCSDS, or flight protocol compatibility is established.",
+    "No live external telemetry source is established.",
+    "No production throughput, latency, deployment, safety, or mission authority is established.",
+    "No live MCP, provider, APEX, AKOS, or Mastermind connectivity is established."
+  ],
+  "receipt_head_rule": "This receipt is terminal only if the commit carrying it passes both repository CI and Public Telemetry Truth Gate and remains fresh against canonical main immediately before merge."
+}
