@@ -1,0 +1,67 @@
+{
+  "schema": "glaciereq.repo-excellence.current-proof.v1",
+  "repository": "GlacierEQ/spacex-telemetry",
+  "canonical_source": {
+    "branch": "main",
+    "sha": "e3e54b4c9ced28ffd02962d2a8983adf3019e93a"
+  },
+  "role": "ACTIVE_SPECIALIST_COMPONENT",
+  "canonical_family_decision": "Separate specialist owner of the synthetic telemetry codec/laboratory mechanism; not a routing, propulsion-health, or application-control projection.",
+  "problem_verified": "Deterministic repository-local telemetry framing, integrity rejection, sequence accounting, threshold control, local Protobuf serialization, and bounded Go packet behavior need one directly operable truth-bounded laboratory.",
+  "unique_value": "Python framed-stream integrity/control + generated Protobuf round trips + strict Go packet codec + installed deterministic local operator surface under one repository-native verification contract.",
+  "reusable_capabilities": [
+    "bounded framed-stream decoder with CRC rejection and sequence-gap accounting",
+    "deterministic threshold and rolling-health control",
+    "local generated Protobuf round-trip serialization",
+    "strict fixed-width Go packet codec with invalid-input rejection",
+    "zero-external-side-effect installed telemetry demo"
+  ],
+  "exact_head_proof": {
+    "ci": {
+      "run_id": 31644298278,
+      "event": "push",
+      "head_sha": "e3e54b4c9ced28ffd02962d2a8983adf3019e93a",
+      "conclusion": "success",
+      "job_id": 94274119484,
+      "job_name": "ci / python verification",
+      "verified_steps": [
+        "trusted caller boundary",
+        "checkout without persisted credentials",
+        "repository-owned verification script"
+      ]
+    },
+    "public_truth": {
+      "run_id": 31644297856,
+      "event": "push",
+      "head_sha": "e3e54b4c9ced28ffd02962d2a8983adf3019e93a",
+      "conclusion": "success"
+    },
+    "runtime_receipt": "machine/crystallization/completion-receipt.json"
+  },
+  "gates": {
+    "problem_verified": true,
+    "unique_value_known": true,
+    "canonical_identity_known": true,
+    "central_mechanism_implemented": true,
+    "deterministic_tests_pass": true,
+    "adversarial_tests_pass": true,
+    "runtime_behavior_observed": true,
+    "security_authority_bounded": true,
+    "proof_receipt_bound_to_sha": true,
+    "reusable_capabilities_extracted": true,
+    "projections_truth_consistent": true,
+    "evolution_cursor_defined": true
+  },
+  "authority_boundary": {
+    "external_inputs_consumed": 0,
+    "external_actions_executed": 0,
+    "production_or_flight_authority": false,
+    "company_affiliation_claimed": false
+  },
+  "nonclaims": [
+    "No SpaceX affiliation, proprietary telemetry, private protocol, or operational flight data is established.",
+    "No Falcon, Starship, CCSDS, live socket ingestion, production throughput, latency, reliability, safety, or mission authority is established.",
+    "No live MCP, provider, APEX, AKOS, or Mastermind integration is established."
+  ],
+  "next_cursor": "Integrate this exact-head telemetry excellence proof into fresh GlacierEQ/job-app-helix ancestry; then advance Wave-1 to the next unresolved repository. Reopen telemetry mechanism work only on source drift or a demonstrated defect."
+}
