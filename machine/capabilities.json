@@ -11,7 +11,30 @@
     "local-protobuf-serialization",
     "bounded-go-binary-codec",
     "installable-local-library-and-cli",
-    "direct-deterministic-operability"
+    "direct-deterministic-operability",
+    "apex-mass-recovery-enrolled"
   ],
-  "terminal_status_requires": "exact-head Python/Go build, tests, installed CLI, direct runtime, public truth verification, empty gap matrix, and source-bound completion receipt"
+  "terminal_status_requires": "exact-head Python/Go build, tests, installed CLI, direct runtime, public truth verification, empty gap matrix, and source-bound completion receipt",
+  "recovery": {
+    "identity": "APEX_IS_THE_COUNTER_TO_CANONICAL_DESTRUCTION",
+    "law": "MAXIMUM_COHERENT_ADVANCE",
+    "program": "mass-job-repo-recovery",
+    "dual_plane": true
+  },
+  "planes": {
+    "verified": [
+      "synthetic-telemetry-framing",
+      "bounded-partial-frame-buffering",
+      "crc-integrity-rejection",
+      "sequence-gap-accounting",
+      "local-threshold-controller",
+      "local-protobuf-serialization",
+      "bounded-go-binary-codec",
+      "installable-local-library-and-cli",
+      "direct-deterministic-operability"
+    ],
+    "implemented": [
+      "apex-mass-recovery-enrolled"
+    ]
+  }
 }
