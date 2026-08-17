@@ -11,7 +11,11 @@
     "local-protobuf-serialization",
     "bounded-go-binary-codec",
     "installable-local-library-and-cli",
-    "direct-deterministic-operability"
+    "direct-deterministic-operability",
+    "independent-decider-actuator-signatures",
+    "digest-bound-dual-key-local-actuation",
+    "precondition-gated-replay-resistant-execution",
+    "execution-and-postcondition-receipts"
   ],
   "terminal_status_requires": "exact-head Python/Go build, tests, installed CLI, direct runtime, public truth verification, empty gap matrix, and source-bound completion receipt"
 }
