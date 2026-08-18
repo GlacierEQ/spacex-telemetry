@@ -1,2 +1,2 @@
 # AKOS Bridge
-Canonical: https://github.com/GlacierEQ/AKOS
+APEX: https://github.com/GlacierEQ/AKOS
