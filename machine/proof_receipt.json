@@ -4,12 +4,12 @@
   "source_sha": "9055e48a588e06f151a30783a85e261d12abf16a526a493ce350221e90b07e3e",
   "proof_id": "elite-spacex-telemetry-1786335149",
   "environment": {
-    "python": "/Users/kcbflux/job-app/excellence/.venv-elite/bin/python",
-    "PYTHONPATH": "/Users/kcbflux/job-app/repos/spacex-telemetry:/Users/kcbflux/job-app/repos/spacex-telemetry/src",
+    "python": "${HOME}/job-app/excellence/.venv-elite/bin/python",
+    "PYTHONPATH": "${HOME}/job-app/repos/spacex-telemetry:${HOME}/job-app/repos/spacex-telemetry/src",
     "entry": "unittest"
   },
   "tests": [
-    "/Users/kcbflux/job-app/excellence/.venv-elite/bin/python -m unittest discover -s tests -v (x2)"
+    "${HOME}/job-app/excellence/.venv-elite/bin/python -m unittest discover -s tests -v (x2)"
   ],
   "adversarial_tests": [
     "tests/test_adversarial.py"
