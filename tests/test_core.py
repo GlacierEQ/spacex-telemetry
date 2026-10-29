@@ -52,3 +52,37 @@ def test_novelty_detector():
     block = TelemetryBlock(sensor_id=1, values=block_vals, timestamp=0.0)
     result = n.analyze_block(block)
     assert result.compression_ratio <= 1.0
+
+
+def test_hold_summary_renders_operational_values():
+    from spacex_telemetry.core import HoldReasonCompiler
+
+    holds = HoldReasonCompiler()
+    holds.add_hold("guidance", "sensor out of range")
+    summary = holds.summary()
+    assert "HOLD — 1 issue(s):" in summary
+    assert "[guidance] sensor out of range" in summary
+    assert "{" not in summary
+    holds.clear_hold("guidance")
+    assert holds.summary() == "ALL SYSTEMS GO"
+
+
+def test_anomaly_messages_render_measured_values():
+    from spacex_telemetry.core import AnomalyDetector, LaunchPhase, TelemetryFrame
+
+    detector = AnomalyDetector(max_g=5.0, max_velocity_ms=120.0)
+    first = TelemetryFrame(
+        timestamp_ms=1000, altitude_m=-1.0, velocity_ms=130.0,
+        acceleration_g=6.7, downrange_km=0.0, phase=LaunchPhase.PRE_LAUNCH,
+    )
+    first_messages = detector.ingest(first)
+    assert "G-load 6.7 exceeds limit 5.0" in first_messages
+    assert "Velocity 130 m/s exceeds limit" in first_messages
+    assert "Negative altitude detected" in first_messages
+    second = TelemetryFrame(
+        timestamp_ms=1100, altitude_m=10.0, velocity_ms=200.0,
+        acceleration_g=0.0, downrange_km=0.0, phase=LaunchPhase.PRE_LAUNCH,
+    )
+    second_messages = detector.ingest(second)
+    assert "High jerk 700 m/s² detected" in second_messages
+    assert all("{" not in message for message in first_messages + second_messages)
