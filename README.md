@@ -1,5 +1,9 @@
 # SpaceX Telemetry — Synthetic Telemetry Codec Laboratory
 
+> **APEX dual-plane recovery:** verified lab proof remains `LOCAL_SYNTHETIC_TELEMETRY_CODEC_NOT_SPACEX_DATA` (not SpaceX flight authority). Implemented software planes are restored as first-class capabilities under MAXIMUM_COHERENT_ADVANCE — governance routes power; it does not amputate it.
+
+**Implemented planes:** telemetry-bus-fanout, protobuf-mesh-bridge-surface, lab-cli-operate-path, multi-language-decoder-surface
+
 **An installable repository-local Python/Go telemetry codec and controller laboratory with CRC rejection, bounded buffering, sequence-gap accounting, threshold alerts, Protobuf round trips, and a strict Go demonstration packet codec.**
 
 > **Independence / non-affiliation:** This is an independent GlacierEQ engineering portfolio project. It is not affiliated with, endorsed by, or based on private systems, telemetry, wire formats, mission criteria, or data from SpaceX. The repository name describes a portfolio target/domain exercise, not provenance.
